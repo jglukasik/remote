@@ -12,45 +12,45 @@
 <div class="container" role="main">
   <div class="row span7 text-center">
       <p><p><p><p>
-      <button class="btn btn-lg btn-danger" onclick="remote('power',1)">
+      <button class="btn btn-lg btn-danger" onclick="remote('power')">
         Power
       </button>
       <p>
-      <button class="btn btn-lg btn-success" onclick="remote('hdmi',1)">
+      <button class="btn btn-lg btn-success" onclick="remote('chromecast')">
         Chromecast
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('hdmi',3)">
+      <button class="btn btn-lg btn-success" onclick="remote('xbox')">
         XBox
       </button>
       <p>
-      <button class="btn btn-lg btn-success" onclick="remote('hdmi',2)">
+      <button class="btn btn-lg btn-success" onclick="remote('laptop')">
         Laptop
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('vga',1)">
+      <button class="btn btn-lg btn-success" onclick="remote('wii')">
         Wii
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('tv',1)">
+      <button class="btn btn-lg btn-success" onclick="remote('tv')">
         TV
       </button>
       <p>
       <div class="btn-group-vertical">
-      <button class="btn btn-lg btn-primary" onclick="remote('volup',2)">
+      <button class="btn btn-lg btn-primary" onclick="remote('volup', 1)">
         Volume Up 1
       </button>
-      <button class="btn btn-lg btn-primary" onclick="remote('voldown',2)">
+      <button class="btn btn-lg btn-primary" onclick="remote('voldown', 1)">
         Volume Down 1
       </button>
       </div>
       <div class="btn-group-vertical">
-      <button class="btn btn-lg btn-primary" onclick="remote('volup',6)">
+      <button class="btn btn-lg btn-primary" onclick="remote('volup', 5)">
         Volume Up 5
       </button>
-      <button class="btn btn-lg btn-primary" onclick="remote('voldown',6)">
+      <button class="btn btn-lg btn-primary" onclick="remote('voldown', 5)">
         Volume Down 5
       </button>
       </div>
       <p><p>
-      <button class="btn btn-lg btn-primary" onclick="remote('mute',1)">
+      <button class="btn btn-lg btn-primary" onclick="remote('mute')">
         Mute
       </button>
     </p>
@@ -74,7 +74,7 @@ function remote(button, clicks) {
   
   var http = new XMLHttpRequest();
   var path = "cgi-bin/remote.pl";
-  var params = "?button=" + button + "&clicks=" + clicks;
+  var params = "?action=" + action + "&count=" count;
 
   console.log(path+params);
   http.open("GET", path+params, true);
