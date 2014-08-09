@@ -12,24 +12,24 @@
 <div class="container" role="main">
   <div class="row span7 text-center">
       <p><p><p><p>
-      <button class="btn btn-lg btn-danger" onclick="remote('power')">
+      <button class="btn btn-lg btn-danger" onclick="remote('power',1)">
         Power
       </button>
       <p>
-      <button class="btn btn-lg btn-success" onclick="remote('chromecast')">
+      <button class="btn btn-lg btn-success" onclick="remote('chromecast',1)">
         Chromecast
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('xbox')">
+      <button class="btn btn-lg btn-success" onclick="remote('xbox',1)">
         XBox
       </button>
       <p>
-      <button class="btn btn-lg btn-success" onclick="remote('laptop')">
+      <button class="btn btn-lg btn-success" onclick="remote('laptop',1)">
         Laptop
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('wii')">
+      <button class="btn btn-lg btn-success" onclick="remote('wii',1)">
         Wii
       </button>
-      <button class="btn btn-lg btn-success" onclick="remote('tv')">
+      <button class="btn btn-lg btn-success" onclick="remote('tv',1)">
         TV
       </button>
       <p>
@@ -50,7 +50,7 @@
       </button>
       </div>
       <p><p>
-      <button class="btn btn-lg btn-primary" onclick="remote('mute')">
+      <button class="btn btn-lg btn-primary" onclick="remote('mute',1)">
         Mute
       </button>
     </p>
@@ -70,11 +70,11 @@
 </html>
 
 <script>
-function remote(button, clicks) {
+function remote(action, count) {
   
   var http = new XMLHttpRequest();
   var path = "cgi-bin/remote.pl";
-  var params = "?action=" + action + "&count=" count;
+  var params = "?action=" + action + "&count=" + count;
 
   console.log(path+params);
   http.open("GET", path+params, true);
