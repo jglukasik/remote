@@ -37,20 +37,20 @@ sub take_action {
 	my $function = "input";
 	my $url = "https://api.spark.io/v1/devices/$id/$function";
 	
-	my %actions = (
-		"power" => 	["power"],
-		"tv" => 	["tv"],
-		"wii" => 	["vga"],
-		"chromecast" => ["tv", "hdmi"],
-		"laptop" => 	["tv", "hdmi", "hdmi"], 
-		"xbox" => 	["tv", "hdmi", "hdmi", "hdmi"],
-		"volup" => 	["volup"],
-		"voldown" => 	["voldown"],
-		"mute" => 	["mute"],
-	);
+	my %actions = 
+		( "power" 	    =>	["power"]
+		, "tv"  		    => 	["tv"]
+		, "wii"	  	    => 	["av"]
+		, "chromecast"	=>	["tv", "hdmi"]
+		, "xbox"  	    => 	["tv", "hdmi", "hdmi"]
+		, "laptop"	    => 	["tv", "hdmi", "hdmi", "hdmi"]
+		, "volup"	      => 	["volup"]
+		, "voldown"	    => 	["voldown"]
+		, "mute"	      => 	["mute"]
+		);
 	
 	if ($action =~ /^vol/){
-	my $code = hex $buttons{$action};
+		my $code = hex $buttons{$action};
 		for my $i (0..$count){
 			$ua->post($url, ['access_token' => $token, 'args' => $code]);
 			usleep($vol_delay);
@@ -64,11 +64,3 @@ sub take_action {
 		}
 	}
 }
-
-
-
-
-
-
-
-
