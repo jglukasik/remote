@@ -19,9 +19,6 @@ my $home_ip = $credentials::home_ip;
 use insignia_codes;
 my %buttons = %insignia_codes::buttons;
 
-#use apex_codes;
-#my %buttons = %apex_codes::buttons;
-
 my $q = CGI->new;
 my $action = $q->param('action');
 my $count= $q->param('count');
@@ -41,16 +38,12 @@ sub take_action {
 	my $ua = LWP::UserAgent->new;
   my $function = "input";
  
-  if ($action =~ /^test/) {
+  if ($count == 0) {
     $function = "test";
   }
 
 	my $url = "https://api.spark.io/v1/devices/$id/$function";
 	
-  if ($action =~ /^test/) {
-			$ua->post($url, ['access_token' => $token]);
-  }
-
 	my %actions = 
 		( "power" 	    =>	["power"]
 		, "tv"  		    => 	["tv"]
@@ -61,6 +54,7 @@ sub take_action {
 		, "volup"	      => 	["volup"]
 		, "voldown"	    => 	["voldown"]
 		, "mute"	      => 	["mute"]
+    , "input"       =>  ["input", "input", "enter"]
 		);
 	
 	if ($action =~ /^vol/){
