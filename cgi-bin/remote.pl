@@ -9,13 +9,18 @@ use CGI;
 use Data::Dumper;
 use Time::HiRes qw(usleep);
 
+print "Content-type: text/plain\n\n";
+
 use credentials;
 my $id = $credentials::id;
 my $token = $credentials::token;
 my $home_ip = $credentials::home_ip;
 
-use apex_codes;
-my %buttons = %apex_codes::buttons;
+use insignia_codes;
+my %buttons = %insignia_codes::buttons;
+
+#use apex_codes;
+#my %buttons = %apex_codes::buttons;
 
 my $q = CGI->new;
 my $action = $q->param('action');
@@ -34,9 +39,18 @@ sub take_action {
 	my $input_delay = 1500000;
 	
 	my $ua = LWP::UserAgent->new;
-	my $function = "input";
+  my $function = "input";
+ 
+  if ($action =~ /^test/) {
+    $function = "test";
+  }
+
 	my $url = "https://api.spark.io/v1/devices/$id/$function";
 	
+  if ($action =~ /^test/) {
+			$ua->post($url, ['access_token' => $token]);
+  }
+
 	my %actions = 
 		( "power" 	    =>	["power"]
 		, "tv"  		    => 	["tv"]
