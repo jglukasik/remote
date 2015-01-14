@@ -32,6 +32,10 @@
       <button class="btn btn-lg btn-success" onclick="remote('tv',1)">
         TV
       </button>
+      <p><p>
+      <button class="btn btn-lg btn-success" onclick="remote('input',1)">
+        Input
+      </button>
       <p>
       <div class="btn-group-vertical">
       <button class="btn btn-lg btn-primary" onclick="remote('volup', 1)">
@@ -64,7 +68,7 @@
   </div> 
 
   <div class="row span7 text-center">
-      <button class="btn btn-lg btn-info" onclick="remote('test',1)">
+      <button class="btn btn-lg btn-info" onclick="testLed()">
         Flash LED 
       </button>
   </div>
@@ -76,15 +80,36 @@
 </html>
 
 <script>
+var isTestLed = 0;
+
 function remote(action, count) {
   
   var http = new XMLHttpRequest();
   var path = "cgi-bin/remote.pl";
+
+  // If we are on testing mode, send a count of 0
+  // This will tell remote.pl to run the test function
+  // on the spark core
+  if (isTestLed) {
+    count = 0;
+  }
+
   var params = "?action=" + action + "&count=" + count;
 
   console.log(path+params);
   http.open("GET", path+params, true);
   http.send();
+
+  // Reset back to normal mode, not testing
+  document.body.style.background = "#FFFFFF";
+  isTestLed = 0;
 }
+
+function testLed(){
+  // Set to testing mode
+  document.body.style.background = "#ADD8E6";
+  isTestLed = 1;
+}
+
 </script>
 
