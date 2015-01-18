@@ -33,7 +33,7 @@ if ($remote_ip eq $home_ip || $source_ip eq $home_ip){
 sub take_action {
 	my ($action, $count) = @_;
 	my $vol_delay = 300;
-	my $input_delay = 1500000;
+	my $input_delay = 100000;
 	
 	my $ua = LWP::UserAgent->new;
   my $function = "input";
