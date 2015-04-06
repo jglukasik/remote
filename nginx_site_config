@@ -1,0 +1,27 @@
+server {
+	listen 80;
+
+# Finish these lines with the root dir and server name
+# -------------------
+# root /var/www/ ;
+# server_name tv. ;
+# -------------------
+
+# Android on mobile uses a caching service from google, meaning the IP the
+# script sees might be googles, so we will also look at the x-forwarded-for IP 
+  proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+	index index.html;
+
+# Configure perl cgi
+	location ~ \.pl$ {
+		gzip off;
+		include /etc/nginx/fastcgi_params;
+		fastcgi_pass unix:/var/run/fcgiwrap.socket;
+		fastcgi_index index.pl;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+
+}
+		
